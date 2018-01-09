@@ -1,18 +1,37 @@
 import { 
-  HELLO_WORLD
+  HELLO_WORLD,
+  CREATE_SIZE
 } from '../actions'
 
 /**
  * State Initializers
- */
+**/
 const golState = {
-  text: 'test'
+  fps: 120,
+  board: [],
+  seed: 0,
 }
 
+// Things todo
 
- /**
+// Create Grid
+// Create FPS
+// Create Seed
+// Create Filter
+//  - underpopulation
+//  - overpopulation
+//  - reproduction
+
+// State = {
+//   generationCounter
+//   map: [[], [], [], []]
+// }
+
+
+
+/**
  * Reducers
- */
+**/
 export default function gol(state = golState, action) {
   switch (action.type) {
   case HELLO_WORLD:
@@ -20,10 +39,16 @@ export default function gol(state = golState, action) {
       text: action.text
     })
 
+  case CREATE_SIZE:
+    return Object.assign({}, state, {
+      board: action.board
+    })
+
   default:
     return state
   }
 }
+
 
 // export const getVisibleTodos = (todos, filter) => {
 //   switch (filter) {

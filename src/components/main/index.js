@@ -1,11 +1,21 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 
-import { getHello } from '../../redux/actions'
+// import Grid from './components/grid'
+import Cell from './components/cell'
+
+import { createCells } from '../../redux/actions'
 
 class Main extends Component {
   componentDidMount() {
-    this.props.getHello()
+    let size = 400
+    this.props.createCells(size)
+  }
+
+  renderCells() {
+    return this.props.board.map((v, k) => {
+      return <Cell key={'cell-'+k} />
+    })
   }
 
   render() {
@@ -17,7 +27,9 @@ class Main extends Component {
         <br/>
         <br/>
 
-        {this.props.text}
+        <div className="container-small">
+          { this.renderCells() }
+        </div>
       </main>
     )
   }
@@ -25,14 +37,14 @@ class Main extends Component {
 
 const mapStateToProps = (state, props) => {
   return {
-    text: state.gol.text,
+    board: state.gol.board,
   }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    getHello: () => {
-      dispatch(getHello())
+    createCells: (size) => {
+      dispatch(createCells(size))
     }
   }
 }

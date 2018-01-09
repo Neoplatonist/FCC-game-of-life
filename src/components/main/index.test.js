@@ -11,26 +11,3 @@ describe('all tests', () => {
     
   })
 })
-
-
-
-// Things todo
-
-// Create Grid
-// Create FPS
-// Create Seed
-// Create Filter
-//  - underpopulation
-//  - overpopulation
-//  - reproduction
-
-// State = {
-//   generationCounter
-//   map: [[], [], [], []]
-// }
-
-
-// 0 0 0 0 0
-// 0 0 0 0 0
-// 0 0 0 0 0
-// 0 0 0 0 0
