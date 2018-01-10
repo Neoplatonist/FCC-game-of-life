@@ -19,14 +19,20 @@ export function getHello() {
   }
 }
 
-export function createCells(size) {
+export function createCells(row, col) {
   return dispatch => {
-    let arr = new Array(size)
-      .fill(undefined)
+    let board = []
+
+    for (let i = 0; i < row; i++) {
+      board[i] = []
+      for (let j = 0; j < col; j++) {
+        board[i][j] = [i, j]
+      }
+    }
 
     dispatch({
       type: CREATE_SIZE,
-      board: arr
+      board: board
     })
   }
 }

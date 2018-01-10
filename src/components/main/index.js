@@ -1,35 +1,23 @@
 import React, {Component} from 'react'
+import Board from './components/board'
+import Controls from './components/controls'
+
 import { connect } from 'react-redux'
-
-// import Grid from './components/grid'
-import Cell from './components/cell'
-
 import { createCells } from '../../redux/actions'
 
 class Main extends Component {
   componentDidMount() {
-    let size = 400
-    this.props.createCells(size)
-  }
-
-  renderCells() {
-    return this.props.board.map((v, k) => {
-      return <Cell key={'cell-'+k} />
-    })
+    let row = 50
+    let col = 70
+    this.props.createCells(row, col)
   }
 
   render() {
     return (
       <main>
-        Game of Life
+        <Board board={this.props.board}/>
 
-        <br/>
-        <br/>
-        <br/>
-
-        <div className="container-small">
-          { this.renderCells() }
-        </div>
+        <Controls />
       </main>
     )
   }
@@ -43,8 +31,8 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    createCells: (size) => {
-      dispatch(createCells(size))
+    createCells: (row, col) => {
+      dispatch(createCells(row, col))
     }
   }
 }
