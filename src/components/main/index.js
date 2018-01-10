@@ -6,16 +6,21 @@ import { connect } from 'react-redux'
 import { createCells } from '../../redux/actions'
 
 class Main extends Component {
+  constructor (props) {
+    super(props)
+
+    this.row = 50
+    this.col = 70
+    this.total = this.row * this.col
+  }
   componentDidMount() {
-    let row = 50
-    let col = 70
-    this.props.createCells(row, col)
+    this.props.createCells(this.row, this.col)
   }
 
   render() {
     return (
       <main>
-        <Board board={this.props.board}/>
+        <Board board={this.props.board} total={this.total}/>
 
         <Controls />
       </main>

@@ -24,9 +24,11 @@ export function createCells(row, col) {
     let board = []
 
     for (let i = 0; i < row; i++) {
-      board[i] = []
       for (let j = 0; j < col; j++) {
-        board[i][j] = [i, j]
+        board.push({
+          coords: [i, j],
+          type: 0
+        })
       }
     }
 
