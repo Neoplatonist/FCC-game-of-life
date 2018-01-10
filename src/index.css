@@ -17,6 +17,11 @@ header h1 {
   margin: 0;
 }
 
+#generations {
+  text-align: center;
+  margin-bottom: 1em;
+}
+
 .container-small {
   margin: auto;
   width: 900px;
@@ -34,6 +39,7 @@ header h1 {
   height: 10px;
   padding: 0;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .empty {

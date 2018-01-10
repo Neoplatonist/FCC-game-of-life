@@ -1,6 +1,7 @@
 import { 
+  CREATE_SIZE,
   HELLO_WORLD,
-  CREATE_SIZE
+  RANDOMIZER
 } from '../actions'
 
 /**
@@ -9,7 +10,8 @@ import {
 const golState = {
   fps: 120,
   board: [],
-  seed: 0,
+  generations: 0,
+  seed: 0
 }
 
 // Things todo
@@ -44,20 +46,12 @@ export default function gol(state = golState, action) {
       board: action.board
     })
 
+  case RANDOMIZER:
+    return Object.assign({}, state, {
+      board: action.board
+    })
+
   default:
     return state
   }
 }
-
-
-// export const getVisibleTodos = (todos, filter) => {
-//   switch (filter) {
-//     case VISIBILITY_FILTER__SHOW_ACTIVE:
-//       return todos.filter(todo => !todo.completed)
-//     case VISIBILITY_FILTER__SHOW_COMPLETED:
-//       return todos.filter(todo => todo.completed)
-//     case VISIBILITY_FILTER__SHOW_ALL:
-//     default:
-//       return todos
-//   }
-// }
