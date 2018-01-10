@@ -1,40 +1,33 @@
-
 /**
  * action types
 **/
+export const CHANGE_CELL = 'CHANGE_CELL'
 export const CREATE_SIZE = 'CREATE_SIZE'
-export const HELLO_WORLD = 'HELLO_WORLD'
 export const RANDOMIZER = 'RANDOMIZER'
+export const LOCK = 'LOCK'
+export const UNLOCK = 'UNLOCK'
 
 
 /**
  * action creators
 **/
-export function getHello() {
-  return dispatch => {
-    dispatch({
-      type: HELLO_WORLD,
-      text: 'Hello, World!'
-    })
-  }
-}
-
 export function createCells(row, col) {
   return dispatch => {
     let board = []
 
     for (let i = 0; i < row; i++) {
       for (let j = 0; j < col; j++) {
-        board.push({
-          coords: [i, j],
-          type: 0
-        })
+        board.push([i, j])
       }
     }
 
+    let cycles = new Array(board.length)
+      .fill(0)
+
     dispatch({
       type: CREATE_SIZE,
-      board: board
+      board: board,
+      cycles: cycles
     })
   }
 }
@@ -42,30 +35,67 @@ export function createCells(row, col) {
 export function randomizer(row, col) {
   return dispatch => {
     let board = []
-
-    // let min = 0
-    // let max = row * col
-    // let rand = Math.floor(Math.random() * (max - min + 1)) + min
+    let cycles = []
 
     for (let i = 0; i < row; i++) {
       for (let j = 0; j < col; j++) {
+        board.push([i, j])
+
         let rand = Math.ceil(Math.random() * 100)
-        let type = 0
-
-        if (rand > 90 || rand < 10) {
-          type = 1
-        }
-
-        board.push({
-          coords: [i, j],
-          type: type
-        })
+        rand > 90 || rand < 10 ? cycles.push(1) : cycles.push(0)
       }
     }
 
     dispatch({
-      type: CREATE_SIZE,
-      board: board
+      type: RANDOMIZER,
+      board: board,
+      cycles: cycles
     })
+  }
+}
+
+export function changeCell(cell) {
+  return (dispatch, getState) => {
+    let cycles = getState().gol.cycles.slice()
+
+    switch (cycles[cell]) {
+      case 0:
+        // change from empty to alive
+        cycles[cell] = 1
+        break
+      case 1:
+        // change from alive to empty
+        cycles[cell] = 0
+        break
+
+      default:
+        break
+    }
+
+    dispatch({
+      type: CHANGE_CELL,
+      cycles: cycles
+    })
+
+  }
+}
+
+export function lock() {
+  return dispatch => {
+    dispatch({
+      type: LOCK,
+      lock: true
+    })
+
+  }
+}
+
+export function unlock() {
+  return dispatch => {
+    dispatch({
+      type: UNLOCK,
+      lock: false
+    })
+
   }
 }

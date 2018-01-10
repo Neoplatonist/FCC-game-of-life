@@ -1,55 +1,61 @@
 import { 
+  CHANGE_CELL,
   CREATE_SIZE,
-  HELLO_WORLD,
-  RANDOMIZER
+  RANDOMIZER,
+  LOCK,
+  UNLOCK
 } from '../actions'
 
 /**
  * State Initializers
 **/
-const golState = {
-  fps: 120,
+export const golState = {
   board: [],
+  cycles: [],
+  fps: 120,
   generations: 0,
-  seed: 0
+  lock: false
 }
 
 // Things todo
 
-// Create Grid
 // Create FPS
-// Create Seed
 // Create Filter
 //  - underpopulation
 //  - overpopulation
 //  - reproduction
-
-// State = {
-//   generationCounter
-//   map: [[], [], [], []]
-// }
-
-
 
 /**
  * Reducers
 **/
 export default function gol(state = golState, action) {
   switch (action.type) {
-  case HELLO_WORLD:
-    return Object.assign({}, state, {
-      text: action.text
-    })
+    case CHANGE_CELL:
+      return Object.assign({}, state, {
+        cycles: action.cycles
+      })
 
-  case CREATE_SIZE:
-    return Object.assign({}, state, {
-      board: action.board
-    })
+    case CREATE_SIZE:
+      return Object.assign({}, state, {
+        board: action.board,
+        cycles: action.cycles
+      })
 
-  case RANDOMIZER:
-    return Object.assign({}, state, {
-      board: action.board
-    })
+    case RANDOMIZER:
+      return Object.assign({}, state, {
+        board: action.board,
+        cycles: action.cycles
+      })
+
+    case LOCK:
+      return Object.assign({}, state, {
+        lock: action.lock
+      })
+
+    case UNLOCK:
+      return Object.assign({}, state, {
+        lock: action.lock
+      })
 
   default:
     return state

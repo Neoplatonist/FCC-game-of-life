@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { changeCell } from '../../../../../../redux/actions'
 
-export default class Cell extends Component {
+class Cell extends Component {
   constructor(props) {
     super(props)
 
@@ -8,28 +10,38 @@ export default class Cell extends Component {
       class: 'empty'
     }
   }
-  componentWillMount() {
-    switch (this.props.type) {
+
+  handleClass = () => {
+    let className = ''
+
+    switch (this.props.cycle) {
       case 0:
         // empty
-        this.setState({class: 'empty'})
+        className = 'empty'
         break
       case 1:
         // alive
-        this.setState({class: 'alive'})
+        className = 'alive'
         break
       case 2:
         // dead
-        this.setState({class: 'dead'})
+        className = 'dead'
         break
       case 3:
         // born
-
-        this.setState({class: 'born'})
+        className = 'born'
         break
     
       default:
         break
+    }
+
+    return 'cell '+className
+  }
+
+  handleClick = (e) => {
+    if (!this.props.lock) {
+      this.props.changeCell(this.props.index)
     }
   }
 
@@ -37,8 +49,23 @@ export default class Cell extends Component {
     return (
       <div 
         id={this.props.row + '-' + this.props.col}
-        className={'cell '+this.state.class}
+        className={this.handleClass()}
+        onClick={this.handleClick}
       > </div>
     )
   }
 }
+
+const mapStateToProps = (state, props) => {
+  return {
+    lock: state.gol.lock
+  }
+}
+
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    changeCell: cell => dispatch(changeCell(cell))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cell)

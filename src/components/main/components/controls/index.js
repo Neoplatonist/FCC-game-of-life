@@ -1,29 +1,26 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { lock } from '../../../../redux/actions'
+import { unlock } from '../../../../redux/actions'
 
-export default class Controls extends Component {
-  constructor(props) {
-    super(props)
-
-    this.handleStart = this.handleStart.bind(this)
-    this.handleStep = this.handleStep.bind(this)
-    this.handleStop = this.handleStop.bind(this)
-    this.handleClear = this.handleClear.bind(this)
-  }
-
-  handleStart(e) {
+class Controls extends Component {
+  handleStart = (e) => {
     console.log("You clicked Start")
+    this.props.lock()
   }
 
-  handleStep(e) {
+  handleStep = (e) => {
     console.log("You clicked Step")
   }
 
-  handleStop(e) {
+  handleStop = (e) => {
     console.log("You clicked Stop")
+    this.props.unlock()
   }
 
-  handleClear(e) {
+  handleClear = (e) => {
     console.log("You clicked Clear")
+    this.props.unlock()
   }
 
   render() {
@@ -37,3 +34,17 @@ export default class Controls extends Component {
     )
   }
 }
+
+const mapStateToProps = (state, props) => {
+  return {
+  }
+}
+
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    lock: () => dispatch(lock()),
+    unlock: () => dispatch(unlock())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Controls)
