@@ -3,7 +3,8 @@ import {
   CREATE_SIZE,
   RANDOMIZER,
   LOCK,
-  UNLOCK
+  UNLOCK,
+  UPDATE_CYCLES
 } from '../actions'
 
 /**
@@ -55,6 +56,11 @@ export default function gol(state = golState, action) {
     case UNLOCK:
       return Object.assign({}, state, {
         lock: action.lock
+      })
+    
+    case UPDATE_CYCLES:
+      return Object.assign({}, state, {
+        cycles: action.cycles
       })
 
   default:

@@ -6,6 +6,7 @@ export const CREATE_SIZE = 'CREATE_SIZE'
 export const RANDOMIZER = 'RANDOMIZER'
 export const LOCK = 'LOCK'
 export const UNLOCK = 'UNLOCK'
+export const UPDATE_CYCLES = 'UPDATE_CYCLES'
 
 
 /**
@@ -49,6 +50,15 @@ export function randomizer(row, col) {
     dispatch({
       type: RANDOMIZER,
       board: board,
+      cycles: cycles
+    })
+  }
+}
+
+export function updateCycles(cycles) {
+  return dispatch => {
+    dispatch({
+      type: UPDATE_CYCLES,
       cycles: cycles
     })
   }

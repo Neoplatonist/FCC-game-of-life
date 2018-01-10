@@ -11,6 +11,7 @@ class Controls extends Component {
 
   handleStep = (e) => {
     console.log("You clicked Step")
+    this.props.step()
   }
 
   handleStop = (e) => {
@@ -21,6 +22,7 @@ class Controls extends Component {
   handleClear = (e) => {
     console.log("You clicked Clear")
     this.props.unlock()
+    this.props.clear()
   }
 
   render() {
