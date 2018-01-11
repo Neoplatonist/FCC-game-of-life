@@ -1,6 +1,7 @@
 import { 
+  ADD_GENERATION,
   CHANGE_CELL,
-  CREATE_SIZE,
+  CREATE_CELLS,
   RANDOMIZER,
   LOCK,
   UNLOCK,
@@ -13,7 +14,7 @@ import {
 export const golState = {
   board: [],
   cycles: [],
-  fps: 120,
+  fps: 240,
   generations: 0,
   lock: false
 }
@@ -31,15 +32,21 @@ export const golState = {
 **/
 export default function gol(state = golState, action) {
   switch (action.type) {
+    case ADD_GENERATION:
+      return Object.assign({}, state, {
+        generations: action.generations
+      })
+
     case CHANGE_CELL:
       return Object.assign({}, state, {
         cycles: action.cycles
       })
 
-    case CREATE_SIZE:
+    case CREATE_CELLS:
       return Object.assign({}, state, {
         board: action.board,
-        cycles: action.cycles
+        cycles: action.cycles,
+        generations: 0
       })
 
     case RANDOMIZER:
@@ -60,7 +67,8 @@ export default function gol(state = golState, action) {
     
     case UPDATE_CYCLES:
       return Object.assign({}, state, {
-        cycles: action.cycles
+        cycles: action.cycles,
+        generations: action.generations
       })
 
   default:

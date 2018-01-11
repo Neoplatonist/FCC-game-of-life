@@ -7,22 +7,30 @@ class Controls extends Component {
   handleStart = (e) => {
     console.log("You clicked Start")
     this.props.lock()
+    this.props.start()
   }
 
   handleStep = (e) => {
     console.log("You clicked Step")
-    this.props.step()
+    if (!this.props.locked) {
+      this.props.step()
+    }
   }
 
   handleStop = (e) => {
     console.log("You clicked Stop")
     this.props.unlock()
+    this.props.stop()
   }
 
   handleClear = (e) => {
     console.log("You clicked Clear")
     this.props.unlock()
     this.props.clear()
+  }
+
+  handleGen = () => {
+    this.props.gen()
   }
 
   render() {
@@ -32,6 +40,7 @@ class Controls extends Component {
         <button onClick={this.handleStep}>Step</button>
         <button onClick={this.handleStop}>Stop</button>
         <button onClick={this.handleClear}>Clear</button>
+        <button onClick={this.handleGen}>Generate</button>
       </section>
     )
   }

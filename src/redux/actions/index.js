@@ -1,8 +1,9 @@
 /**
  * action types
 **/
+export const ADD_GENERATION = 'ADD_GENERATION'
 export const CHANGE_CELL = 'CHANGE_CELL'
-export const CREATE_SIZE = 'CREATE_SIZE'
+export const CREATE_CELLS = 'CREATE_CELLS'
 export const RANDOMIZER = 'RANDOMIZER'
 export const LOCK = 'LOCK'
 export const UNLOCK = 'UNLOCK'
@@ -26,7 +27,7 @@ export function createCells(row, col) {
       .fill(0)
 
     dispatch({
-      type: CREATE_SIZE,
+      type: CREATE_CELLS,
       board: board,
       cycles: cycles
     })
@@ -43,7 +44,7 @@ export function randomizer(row, col) {
         board.push([i, j])
 
         let rand = Math.ceil(Math.random() * 100)
-        rand > 90 || rand < 10 ? cycles.push(1) : cycles.push(0)
+        rand > 85 || rand < 15 ? cycles.push(1) : cycles.push(0)
       }
     }
 
@@ -56,10 +57,14 @@ export function randomizer(row, col) {
 }
 
 export function updateCycles(cycles) {
-  return dispatch => {
+  return (dispatch, getState) => {
+    let gen = getState().gol.generations
+    gen++
+
     dispatch({
       type: UPDATE_CYCLES,
-      cycles: cycles
+      cycles: cycles,
+      generations: gen
     })
   }
 }
@@ -87,6 +92,17 @@ export function changeCell(cell) {
       cycles: cycles
     })
 
+  }
+}
+
+export function addGeneration() {
+  return (dispatch, getState) => {
+    let generations = getState().gol.generations
+    generations++
+    dispatch({
+      type: ADD_GENERATION,
+      generations: generations
+    })
   }
 }
 

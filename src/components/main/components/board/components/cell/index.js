@@ -36,7 +36,7 @@ class Cell extends Component {
         break
     }
 
-    return 'cell '+className
+    return 'cell-small '+className
   }
 
   handleClick = (e) => {

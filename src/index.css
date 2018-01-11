@@ -32,7 +32,27 @@ header h1 {
   background-color: lightslategrey;
 }
 
-.cell {
+.container-large {
+  margin: auto;
+  width: 900px;
+  padding: 50px;
+  display: grid;
+  grid-template-rows: repeat(50, 1fr);
+  grid-template-columns: repeat(70, 1fr);
+  background-color: lightslategrey;
+}
+
+.cell-small {
+  text-align: center;
+  margin: 1px;
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.cell-large {
   text-align: center;
   margin: 1px;
   width: 20px;
@@ -77,5 +97,6 @@ header h1 {
   background-color: lightsteelblue;
   border-radius: 5px;
   font-size: 1.3em;
+  cursor: pointer;
 }
 

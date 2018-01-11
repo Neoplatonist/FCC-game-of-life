@@ -17,7 +17,7 @@ export default class Board extends Component {
 
   render() {
     return (
-      <div className="container-small">
+      <div className="container-large">
         { this.renderCells() }
       </div>
     )
