@@ -14,18 +14,10 @@ import {
 export const golState = {
   board: [],
   cycles: [],
-  fps: 240,
+  fps: 120,
   generations: 0,
   lock: false
 }
-
-// Things todo
-
-// Create FPS
-// Create Filter
-//  - underpopulation
-//  - overpopulation
-//  - reproduction
 
 /**
  * Reducers

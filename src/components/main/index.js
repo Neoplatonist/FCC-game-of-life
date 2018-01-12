@@ -33,6 +33,7 @@ class Main extends Component {
   }
 
   clearBoard = (e) => {
+    clearInterval(this.timer)
     this.props.createCells(this.row, this.col)
   }
 
@@ -68,7 +69,7 @@ class Main extends Component {
   startTimer = () => {
     this.timer = setInterval(() => {
       this.rerender()
-    }, 1000/this.props.fps)
+    }, 100)
   }
 
   stopTimer = () => {
